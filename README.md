@@ -101,8 +101,8 @@
 	* "Editor: Tab Size": 2
 	* "Editor: Detect Indentation": 체크 해제
 	* "Files: Readonly Include"
-		- Add Pattern > febc11-react/workspace-ins/** 입력한 후 OK 선택
-		- Add Pattern > febc11-react/sample/** 입력한 후 OK 선택
+		- Add Pattern > `febc11-react/workspace-ins/**` 입력한 후 OK 선택
+		- Add Pattern > `febc11-react/sample/**` 입력한 후 OK 선택
 		- Readonly Include가 보이지 않을 경우 VSCode를 최신 버전(1.79 이상)으로 업데이트
 
 ### React 개발용 웹브라우저 플러그인
