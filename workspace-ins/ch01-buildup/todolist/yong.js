@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-const yong = {
-  // 지정한 속성과 자식 노드를 가지는 요소 노드를 생성해서 반환
-  // <button type="button" onclick="handleUp()">+</button>
-  // createElement('button', { type: 'button', onclick: 'handleUp()' }, '+');
-  createElement: (tag, props, ...children) => {
-=======
 const yong = (() => {
   let _root;
   let _stateValue;
@@ -13,7 +6,6 @@ const yong = (() => {
   // <button type="button" onclick="handleUp()">+</button>
   // createElement('button', { type: 'button', onclick: 'handleUp()' }, '+');
   const createElement = (tag, props, ...children) => {
->>>>>>> f45a87ba8d16c92d3057f104278ef87e7447cc2b
     // 요소 노드 생성
     const elem = document.createElement(tag);
 
@@ -40,21 +32,6 @@ const yong = (() => {
     }
 
     return elem;
-<<<<<<< HEAD
-  },
-
-  // 루트노드를 관리하는 객체를 생성해서 반환
-  // createRoot(document.getElementById('root')).render(App);
-  createRoot: (rootNode) => {
-    return {
-      // 루트노드 하위에 지정한 함수를 실행해서 받은 컴포넌트를 렌더링 한다.
-      render(appFn){
-        rootNode.appendChild(appFn())
-      }
-    };
-  }
-};
-=======
   };
 
   // 루트노드를 관리하는 객체를 생성해서 반환
@@ -98,6 +75,5 @@ const yong = (() => {
 
   return { createElement, createRoot, useState };
 })();
->>>>>>> f45a87ba8d16c92d3057f104278ef87e7447cc2b
 
 export default yong;

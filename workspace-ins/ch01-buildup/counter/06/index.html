@@ -21,6 +21,7 @@
     }
 
     function Counter(){
+<<<<<<< HEAD
       let count = 0;
 
       const handleDown = () => {
@@ -31,6 +32,19 @@
       };
       const handleReset = event => {
         count = 0;
+=======
+      // let count = 0;
+      const [count, setCount] = Yong.useState(10);
+
+      const handleDown = () => {
+        setCount(count - 1);
+      };
+      const handleUp = () => {
+        setCount(count + 1);
+      };
+      const handleReset = event => {
+        setCount(0);
+>>>>>>> f45a87ba8d16c92d3057f104278ef87e7447cc2b
       };
 
       return (
