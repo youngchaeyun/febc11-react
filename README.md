@@ -272,5 +272,3 @@ git pull upstream main
 * 홈페이지: <https://www.usebruno.com>
 * 다운로드: <https://www.usebruno.com/downloads>
 * 문서: <https://docs.usebruno.com/introduction>
-
-* test
