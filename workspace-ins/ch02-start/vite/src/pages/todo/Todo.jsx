@@ -1,5 +1,4 @@
 import Title from '../../components/Title';
-
 function Todo(){
   return (
     <div>
@@ -8,5 +7,4 @@ function Todo(){
     </div>
   );
 }
-
 export default Todo;
