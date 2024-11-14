@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EditAddress from "./components/EditAddress";
 
 function App() {
 
@@ -29,17 +30,27 @@ function App() {
     }
   });
 
+  const handleAddressChange = event => {
+    
+  };
+
   return (
     <>
       <h2>04 상태관리 대상이 복합 객체일 경우 불변성 관리</h2>
       <p>
-        이메일: { user.emain }<br/>
+        이메일: { user.email }<br/>
         이름: { user.name }<br/>
         전화번호: { user.phone }<br/>
       </p>
       <ul>
         { user.extra.addressBook?.map(address => <li key={ address.id }>{ address.name }: { address.value }</li>) }
       </ul>
+      <p>
+        <EditAddress 
+          addressBook={ user.extra.addressBook }
+          handleAddressChange={ handleAddressChange }
+        />
+      </p>
     </>
   );
 }
