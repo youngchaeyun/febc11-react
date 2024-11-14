@@ -1,18 +1,19 @@
 import { useState } from "react";
 
-
-let count = 0;
-
+// 모듈 스코프 변수 X
+// let count = 0;
 export default function Message(){
+  // 지역 변수 X
+  // let count = 0;
 
-  console.log('Message 렌더링');
-
+  // state 사용
+  const [count, setCount] = useState(0);
   const [msg, setMsg] = useState('');
 
   const handleChange = (event) => {
     const inputMsg = event.target.value;
     setMsg(inputMsg);
-    count++;
+    setCount(count + 1);
   };
 
   return (
