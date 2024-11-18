@@ -2,20 +2,32 @@ import { useState } from "react";
 
 function App() {
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [cellphone, setCellphone] = useState('010');
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [cellphone, setCellphone] = useState('010');
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    cellphone: '010',
+  });
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  // const handleNameChange = (event) => {
+  //   setName(event.target.value);
+  // };
+  // const handleEmailChange = (event) => {
+  //   setEmail(event.target.value);
+  // };
+  // const handleCellphoneChange = (event) => {
+  //   setCellphone(event.target.value);
+  // };
 
-  const handleCellphoneChange = (event) => {
-    setCellphone(event.target.value);
+  const handleChange = (event) => {
+    const newUser = { 
+      ...user,
+      [event.target.name]: event.target.value,
+    };
+    setUser(newUser);
   };
 
   return (
@@ -27,8 +39,8 @@ function App() {
         <input 
           id="name"
           name="name"
-          value={ name }
-          onChange={ handleNameChange }
+          value={ user.name }
+          onChange={ handleChange }
         /><br/>
         <div>검증 실패 메세지</div>
 
@@ -36,8 +48,8 @@ function App() {
         <input 
           id="email"
           name="email"
-          value={ email }
-          onChange={ handleEmailChange }
+          value={ user.email }
+          onChange={ handleChange }
         /><br/>
         <div>검증 실패 메세지</div>
 
@@ -45,8 +57,8 @@ function App() {
         <input 
           id="cellphone"
           name="cellphone"
-          value={ cellphone }
-          onChange={ handleCellphoneChange }
+          value={ user.cellphone }
+          onChange={ handleChange }
         /><br/>
         <div>검증 실패 메세지</div>
 
