@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EditAddress from "./components/EditAddress";
+import { produce } from 'immer';
 
 function App() {
 
@@ -37,21 +38,31 @@ function App() {
     // const newState = { ...user };
 
     // 상태의 불변성을 지키기 위해 복잡한 추가 작업 필요
-    const newAddressBook = user.extra.addressBook.map(address => {
-      if(address.id === Number(event.target.name)){
-        return { ...address, value: event.target.value };
-      }else{
-        return address;
-      }
-    });
+    // 그나마 주소를 바꾼다는 젠제이기 때문에 덜 복잡함
+    // const newAddressBook = user.extra.addressBook.map(address => {
+    //   if(address.id === Number(event.target.name)){
+    //     return { ...address, value: event.target.value };
+    //   }else{
+    //     return address;
+    //   }
+    // });
 
-    const newState = {
-      ...user
-      , extra: {
-        ...user.extra,
-        addressBook: newAddressBook
-      }
-    };
+    // const newState = {
+    //   ...user
+    //   , extra: {
+    //     ...user.extra,
+    //     addressBook: newAddressBook
+    //   }
+    // };
+
+    // immer를 사용해서 불변성 유지
+    // user를 복사한 새로운 객체(draft)를 만들어서 반환
+    const newState = produce(user, draft => {
+      console.log(user);
+      console.log(draft);
+      const address = draft.extra.addressBook.find(address => address.id === Number(event.target.name));
+      address.value = event.target.value;
+    });
 
     // 회사 주소가 변경될 경우
     console.log('user', user === newState); // false
