@@ -17,6 +17,8 @@ class ClickMe extends Component {
   // 1-2/2-1
   static getDerivedStateFromProps(props, state){
     console.log('1-2/2-1 getDerivedStateFromProps 호출됨.');
+
+    return null;
   }
 
   // 2-2
@@ -64,10 +66,8 @@ class Parent extends Component {
   render(){
     return (
       <div>
-        <h1>01 클래스 컴포넌트</h1>
+        <h1>03 클래스 컴포넌트 - 컴포넌트의 라이프 사이클</h1>
         <ClickMe level={2} />
-        <ClickMe level={5} />
-        <ClickMe />
       </div>
     );
   }
