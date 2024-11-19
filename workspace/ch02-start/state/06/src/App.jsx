@@ -16,6 +16,9 @@ function App() {
     watch,
     formState: { errors },
   } = useForm({
+    mode: "onSubmit", // 최초 검증 시점, default onSubmit
+    reValidateMode: "onChange", // 재검증 시점, default onChange
+    criteriaMode: "firstError", // 검증 에러가 발생할 경우 errors 객체의 필드 속성에 첫 오류 하나만 포함하거나(firstError) 전부 포함(all), default firstError
     defaultValues: {
       name: "",
       email: "",
@@ -27,6 +30,8 @@ function App() {
   const onSubmit = (user) => {
     console.log("서버에 전송", user);
   };
+
+  console.log(errors);
 
   return (
     <>
@@ -41,6 +46,10 @@ function App() {
             minLength: {
               value: 2,
               message: "2글자 이상 입력하세요.",
+            },
+            pattern: {
+              value: /^[^\d]*$/, // 숫자는 포함할수 없음
+              message: "숫자는 입력할 수 없습니다.",
             },
           })}
         />
