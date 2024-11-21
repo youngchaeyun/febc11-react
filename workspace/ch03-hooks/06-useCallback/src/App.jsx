@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import Product from "./Product";
+import Product2 from "./Product2";
 import Shipping from "./Shipping";
 
 function App() {
@@ -69,7 +70,7 @@ function App() {
         06 useCallback(함수 자체를 memoize), React.memo(컴포넌트를 memoize)
       </h1>
       {/* <Product name={ data.name } price={ data.price } mainImage={ data.mainImage } content={ data.content } /> */}
-      <Product product={data} />
+      <Product2 product={data} />
 
       <h2>수량 선택</h2>
       <div>
