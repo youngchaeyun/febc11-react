@@ -18,6 +18,8 @@ function App() {
   const [quantity, setQuantity] = useState(1);
   const [shippingFees, setShippingFees] = useState(data.shippingFees);
 
+  const productPrice = data.price * quantity;
+
   // 수량이 변경되면 배송비 다시 계산
   const handleQuantityChange = (e) => {
     const newQuantity = Number(e.target.value);
@@ -39,12 +41,12 @@ function App() {
       <div>
         가격: { data.price.toLocaleString() }원<br/>
         수량: <input type="number" min="1" max={ data.quantity - data.buyQuantity } 
-                value="1" onChange={ handleQuantityChange } />
+                value={ quantity } onChange={ handleQuantityChange } />
         (배송비는 5개당 { data.shippingFees.toLocaleString() }원씩 추가됩니다.)<br/>
-        상품 금액: { data.price.toLocaleString() }원
+        상품 금액: { productPrice.toLocaleString() }원
       </div>
 
-      <Shipping handlePayment={ handlePayment } />
+      <Shipping fees={ shippingFees } handlePayment={ handlePayment } />
     </>
   );
 }
