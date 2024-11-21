@@ -29,11 +29,11 @@ function App() {
   const handlePayment = () => {
     alert(`상품을 결제하시겠습니까?`);
   };
-  
+
   return (
     <>
       <h1>06 useCallback(함수 자체를 memoize), React.memo(컴포넌트를 memoize)</h1>
-      <Product name={ data.name } price={ data.price } mainImage={ data.mainImage } content={ data.content }/>
+      <Product name={ data.name } price={ data.price } mainImage={ data.mainImage } content={ data.content } />
 
       <h2>수량 선택</h2>
       <div>
