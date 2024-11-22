@@ -1,42 +1,9 @@
-import { useEffect, useState } from "react";
+import useFetch from "@hooks/useFetch";
 import { PacmanLoader } from "react-spinners";
-
-const API_SERVER = 'https://todo-api.fesp.shop/api';
 
 function App() {
 
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Todo API 서버에 ajax 요청을 보낸다.
-  const fetchTodo = async (fetchParams) => {
-    try{
-      setIsLoading(true);
-      const res = await fetch(API_SERVER + fetchParams.url);
-      console.log(res);
-      const jsonData = await res.json();
-      console.log(jsonData);
-      if(jsonData.ok){
-        setData(jsonData.items);
-        setError(null);
-      }else{
-        throw new Error(jsonData.error.message);
-      }
-    }catch(err){
-      // 에러 처리
-      console.error(err);
-      setError({ message: '일시적인 문제로 인해 작업 처리에 실패했습니다. 잠시후 다시 요청해 주시기 바랍니다.' });
-      setData(null);
-    }finally{
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const fetchParams = { url: '/todolist?delay=3000' };
-    fetchTodo(fetchParams);
-  }, []);
+  const { data, error, isLoading } = useFetch({ url: '/todolist?delay=2000' });
 
   return (
     <>
