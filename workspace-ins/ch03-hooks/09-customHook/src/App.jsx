@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-      <h1>08 Custom Hook - 커스텀 훅 없이 fetch API 사용</h1>
+      <h1>09 Custom Hook - useFetch, useAxios 커스텀 훅 사용</h1>
       <h2>할일 목록</h2>
       { isLoading && 
         <PacmanLoader color="#5eeb34" size={18} />
