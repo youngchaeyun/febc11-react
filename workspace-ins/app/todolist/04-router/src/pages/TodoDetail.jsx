@@ -1,4 +1,8 @@
+import { useParams } from "react-router-dom";
+
 function TodoDetail() {
+  const { _id } = useParams();
+  console.log(_id);
   return (
     <div id="main">
       <h2>할일 상세 보기</h2>
