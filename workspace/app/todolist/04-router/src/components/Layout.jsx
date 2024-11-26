@@ -7,7 +7,7 @@ function Layout() {
     <div className="todoapp">
       <Header />
 
-      <Outlet />
+      <Outlet context={{ hello: "world" }} />
 
       <Footer />
     </div>
