@@ -3,16 +3,7 @@ import { Link } from "react-router-dom";
 
 function TodoAdd() {
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
-    mode: 'onSubmit', // 최초 검증 시점, default onSubmit
-    reValidateMode: 'onChange', // 재검증 시점, default onChange
-    criteriaMode: 'firstError', // 검증 에러가 발생할 경우 errors 객체의 필드 속성에 첫 오류 하나만 포함하거나(firstError) 전부 포함(all), default firstError
-    defaultValues: {
-      name: '',
-      email: '',
-      cellphone: '010',
-    }
-  });
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
   // handleSubmit에서 검증을 통과할 경우 호출됨
   const onSubmit = (item) => {
@@ -29,10 +20,11 @@ function TodoAdd() {
             type="text" 
             id="title" 
             autoFocus
-            { ...register('name', {
+            { ...register('title', {
               required: '제목을 입력하세요.',
             }) }
           />
+          <div className="input-error">{ errors.title?.message }</div>
           <br/>
           <label htmlFor="content">내용 :</label>
           <textarea 
@@ -42,8 +34,9 @@ function TodoAdd() {
               required: '내용을 입력하세요.',
             }) }
           />
+          <div className="input-error">{ errors.content?.message }</div>
           <br/>
-          <Link to="/list/1">추가</Link>
+          <button type="submit">추가</button>
           <Link to="/list">취소</Link>
         </form>
       </div>
