@@ -10,7 +10,7 @@ function TodoEdit() {
   // 프로그래밍 방식으로 페이지 이동에 사용
   const navigate = useNavigate();
 
-  const { register, handleSubmit, reset, setFocus, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       title: item.title,
       content: item.content,
