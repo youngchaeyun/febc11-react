@@ -1,8 +1,8 @@
 import useAxiosInstance from "@hooks/useAxiosInstance";
 import useFetch from "@hooks/useFetch";
 import TodoListItem from "@pages/TodoListItem";
-import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, Outlet, useSearchParams } from "react-router-dom";
 
 // const dummyData = {
 //   items: [{
@@ -18,6 +18,17 @@ import { Link, Outlet } from "react-router-dom";
 function TodoList() {
 
   const [data, setData] = useState();
+  const searchRef = useRef('');
+
+  // 쿼리 스트링 정보를 읽거나 설정
+  // /list?keyword=환승&page=3 => new URLSearchParams('keyword=환승&page=3')
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const params = {
+    keyword: searchParams.get('keyword'),
+    // page: searchParams.get('page'),
+  };
+
   // useEffect(() => {
   //   setData(dummyData);
   // }, []); // 마운트된 후에 한번만 호출
@@ -30,7 +41,7 @@ function TodoList() {
 
   // 컴포넌트 마운트 직후와 삭제 후에 목록 조회를 해야 하므로 함수로 만듬
   const fetchList = async () => {
-    const res = await axios.get('/todolist');
+    const res = await axios.get('/todolist', { params });
     setData(res.data);
   };
 
@@ -55,14 +66,24 @@ function TodoList() {
 
   const itemList = data?.items.map(item => <TodoListItem key={ item._id } item={ item } handleDelete={ handleDelete } />);
 
+
+  
+  // 검색
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const inputKeyword = searchRef.current.value;
+    console.log(inputKeyword);
+
+  };
+
   return (
     <div id="main">
       <h2>할일 목록</h2>
       <div className="todo">
         <Link to="/list/add">추가</Link>
         <br/>
-        <form className="search">
-          <input type="text" autoFocus />
+        <form className="search" onSubmit={ handleSearch }>
+          <input type="text" autoFocus defaultValue={'hello'} ref={ searchRef } />
           <button type="submit">검색</button>
         </form>
         <ul className="todolist">
