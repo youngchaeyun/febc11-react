@@ -26,7 +26,8 @@ function TodoList() {
 
   const params = {
     keyword: searchParams.get('keyword'),
-    // page: searchParams.get('page'),
+    page: searchParams.get('page'),
+    limit: 5,
   };
 
   // useEffect(() => {
@@ -72,6 +73,19 @@ function TodoList() {
     setSearchParams(new URLSearchParams(`keyword=${searchRef.current.value}`));
   };
 
+
+  const current = params.page;
+
+  let pageList = [];  
+  for(let page=1; page<=data?.pagination.totalPages; page++){
+    searchParams.set('page', page);  
+    // keyword=환승&page=1
+    // keyword=환승&page=2
+    // keyword=환승&page=3
+    let search = searchParams.toString();
+    pageList.push(<li className={ current === page ? 'active' : '' }><Link to={`/list?${search}`}>{page}</Link></li>);
+  }
+
   return (
     <div id="main">
       <h2>할일 목록</h2>
@@ -89,9 +103,7 @@ function TodoList() {
 
       <div className="pagination">
         <ul>
-          <li className="active"><Link to={`/list?page=1`}>1</Link></li>
-          <li><Link to={`/list?page=2`}>2</Link></li>
-          <li><Link to={`/list?page=3`}>3</Link></li>
+          { pageList }
         </ul>
       </div>
 
