@@ -47,7 +47,7 @@ function TodoList() {
 
   useEffect(() => {
     fetchList();
-  }, []);
+  }, [searchParams]); // 최초 마운트 후에 호출
 
   // 삭제 작업
   const handleDelete = async (_id) => {
@@ -65,15 +65,11 @@ function TodoList() {
   };
 
   const itemList = data?.items.map(item => <TodoListItem key={ item._id } item={ item } handleDelete={ handleDelete } />);
-
-
   
   // 검색
   const handleSearch = (e) => {
     e.preventDefault();
-    const inputKeyword = searchRef.current.value;
-    console.log(inputKeyword);
-
+    setSearchParams(new URLSearchParams(`keyword=${searchRef.current.value}`));
   };
 
   return (
@@ -83,7 +79,7 @@ function TodoList() {
         <Link to="/list/add">추가</Link>
         <br/>
         <form className="search" onSubmit={ handleSearch }>
-          <input type="text" autoFocus defaultValue={'hello'} ref={ searchRef } />
+          <input type="text" autoFocus defaultValue={ params.keyword } ref={ searchRef } />
           <button type="submit">검색</button>
         </form>
         <ul className="todolist">
