@@ -13,14 +13,14 @@ function Right3() {
   return (
     <div>
       <h3>Right3</h3>
-      {/* <button onClick={ () => dispatch({ type: 'countUp', payload: { step: 2 } }) }> +2 </button> */}
+      {/* <button onClick={ () => dispatch({ type: 'countUp', payload: { step: 2 } }) }>+2</button> */}
       <button onClick={() => dispatch(counterActionCreator.countDown(1))}>
         -1
       </button>
-      <button onClick={() => dispatch(counterActionCreator.countDown(1))}>
+      <button onClick={() => dispatch(counterActionCreator.countReset())}>
         0
       </button>
-      <button onClick={() => dispatch(counterActionCreator.countDown(1))}>
+      <button onClick={() => dispatch(counterActionCreator.countUp(2))}>
         +2
       </button>
     </div>
