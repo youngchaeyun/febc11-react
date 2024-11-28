@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import Left1 from '@components/Left1';
-import Right1 from '@components/Right1';
+import { useEffect, useState } from "react";
+import Left1 from "@components/Left1";
+import Right1 from "@components/Right1";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const countUp = function(step){
+  const countUp = function (step) {
     setCount(count + step);
   };
 
-  useEffect(()=>{
-    console.log('# App 렌더링.');
+  useEffect(() => {
+    console.log("# App 렌더링.");
   });
 
   return (

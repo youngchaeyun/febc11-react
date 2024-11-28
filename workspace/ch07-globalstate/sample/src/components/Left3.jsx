@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 function Left3() {
-  useEffect(()=>{
-    console.log('      # Left3 렌더링.');
+  useEffect(() => {
+    console.log("      # Left3 렌더링.");
   });
   return (
     <div>
