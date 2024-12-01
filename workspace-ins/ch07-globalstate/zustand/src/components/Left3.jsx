@@ -1,13 +1,12 @@
-import CounterContext from '@context/CounterContext';
-import { useContext, useEffect } from 'react';
+import useCounterState from '@zustand/counter';
+import { useEffect } from 'react';
 
 function Left3() {
   useEffect(()=>{
     console.log('      # Left3 렌더링.');
   });
 
-  // CounterContext 구독
-  const { state: { count } } = useContext(CounterContext);
+  const { count } = useCounterState();
 
   return (
     <div>
