@@ -1,3 +1,4 @@
+import counterStore from "@mobx/counterStore";
 import { useEffect } from "react";
 
 function Right3() {
@@ -7,7 +8,9 @@ function Right3() {
   return (
     <div>
       <h3>Right3</h3>
-      <button onClick={() => {}}>+1</button>
+      <button onClick={() => counterStore.countUp(1)}>+1</button>
+      <button onClick={() => counterStore.reset()}>0</button>
+      <button onClick={() => counterStore.countDown(2)}>-2</button>
     </div>
   );
 }
