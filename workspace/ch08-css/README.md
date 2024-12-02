@@ -2,7 +2,7 @@
 
 - 코드 실행(GitHub Page): <https://uzoolove.github.io/febc11-react/workspace-ins/index.html#08>
 
-## 8-1 기본 CSS
+## 8-1 기본 CSS 적용 방법
 
 - CSS 파일을 React 컴포넌트에서 직접 import 해서 사용
 - 기본적인 사용 방법이며, 규모가 작은 프로젝트에서 간편하게 사용
@@ -168,13 +168,13 @@ npx tailwindcss init -p
 - postcss.config.js
   - PostCSS의 플러그인 설정 파일
   - 기본으로 tailwindscss와 autoprefixer 플러그인이 추가되어 있음
-    ```
+    ```js
     export default {
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
       },
-    }
+    };
     ```
 
 #### tailwindcss 지시어 추가
@@ -188,7 +188,7 @@ npx tailwindcss init -p
   ```
 
   - 지시어 경고 수정
-    - VSCode는 @tailwind 키워드를 인식할 수 없어서 경고 발생
+    - VSCode에서 @tailwind 키워드를 인식할 수 없어서 경고가 발생하는 경우
     - VScode 설정에서 unknown at rules 검색 후 CSS > Lint: Unknown At Rules를 Ignore로 변경
 
 #### VSCode 플러그인
