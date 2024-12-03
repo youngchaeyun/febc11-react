@@ -16,7 +16,7 @@ function App() {
     try {
       // const res = await axios.get(`/products/${_id}`, { params: { delay: 1000 } });
       const res = await axios.get(`/products/${_id}`);
-      console.log("res", res);
+      // console.log("res", res); // ('axios 응답 인터셉터 추가' 하기 위해선 이 부분은 삭제 해야함.)
       setData(res.data.item); // 4번 (마운트 후)
       setError(null);
     } catch (err) {
