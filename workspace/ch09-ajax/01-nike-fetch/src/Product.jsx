@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
 
-const Product = memo(function Product({ name, price, mainImage, content }) {
-  // function Product({ name, price, mainImage, content }){
+const Product = memo(function ProductFn({
+  product: { name, price, mainImages, content },
+}) {
   // 복잡한 로직
   console.log("Product 렌더링.");
 
@@ -13,19 +14,22 @@ const Product = memo(function Product({ name, price, mainImage, content }) {
       <p>가격: {price.toLocaleString()}원</p>
       <p>상품 설명</p>
       <div>
-        <img src={`https://11.fesp.shop${mainImage}`} width="600" />
+        {mainImages && (
+          <img src={`https://11.fesp.shop${mainImages[0].path}`} width="600" />
+        )}
         <p>{content}</p>
       </div>
     </>
   );
-  // }
 });
 
 Product.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  mainImage: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    mainImages: PropTypes.array,
+    content: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Product;

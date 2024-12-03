@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { memo } from "react";
 
 const Shipping = memo(function Shipping({ fees, handlePayment }) {
+  console.log("Shipping 렌더링.");
   return (
     <>
       <h2>배송비</h2>
