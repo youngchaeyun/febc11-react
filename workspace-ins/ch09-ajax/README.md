@@ -918,6 +918,7 @@ export default FetchThenRender;
 * Suspense를 사용해 비동기 로직이 간결해짐
 
 #### 단점
+* Suspense 컴포넌트를 추가적으로 감싸는 부분이 복잡해 질 수 있음
 * Suspense와 함께 동작하는 비동기 로직을 직접 작성하기가 복잡해서 외부 라이브러리(React Query, SWR 등)를 사용해야 할 수 있음
   - React 18 버전에 실험적 기능인 use() 훅으로 사용 가능
 
