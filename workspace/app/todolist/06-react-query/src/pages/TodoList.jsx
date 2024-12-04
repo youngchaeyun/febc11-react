@@ -1,23 +1,12 @@
 import useAxiosInstance from "@hooks/useAxiosInstance";
 import TodoListItem from "@pages/TodoListItem";
-import { useEffect, useRef, useState } from "react";
-import { Link, Outlet, useSearchParams } from "react-router-dom";
+import { /* useEffect, */ useRef /* useState */ } from "react";
+import { Link, /* Outlet, */ useSearchParams } from "react-router-dom";
 import "../Pagination.css";
 import Pagination from "@components/Pagination";
-
-// const dummyData = {
-//   items: [{
-//     _id: 1,
-//     title: '잠자기',
-//   }, {
-//     _id: 2,
-//     title: '자바스크립트 복습',
-//     done: true,
-//   }]
-// };
+import { useQuery } from "@tanstack/react-query";
 
 function TodoList() {
-  const [data, setData] = useState();
   const searchRef = useRef("");
 
   // 쿼리 스트링 정보를 읽거나 설정
@@ -30,25 +19,26 @@ function TodoList() {
     limit: 5,
   };
 
-  // useEffect(() => {
-  //   setData(dummyData);
-  // }, []); // 마운트된 후에 한번만 호출
-
-  // API 서버에서 목록 조회
-  // const { data } = useFetch({ url: '/todolist' });
-
   // axios 인스턴스
   const axios = useAxiosInstance();
 
-  // 컴포넌트 마운트 직후와 삭제 후에 목록 조회를 해야 하므로 함수로 만듬
-  const fetchList = async () => {
-    const res = await axios.get("/todolist", { params });
-    setData(res.data);
-  };
+  // const [data, setData] = useState();
+  // // 컴포넌트 마운트 직후와 삭제 후에 목록 조회를 해야 하므로 함수로 만듬
+  // const fetchList = async () => {
+  //   const res = await axios.get('/todolist', { params });
+  //   setData(res.data);
+  // };
+  // useEffect(() => {
+  //   fetchList();
+  // }, [searchParams]); // 최초 마운트 후에 호출
 
-  useEffect(() => {
-    fetchList();
-  }, [searchParams]); // 최초 마운트 후에 호출
+  const { data, refetch } = useQuery({
+    queryKey: ["todolist", params],
+    queryFn: () => axios.get("/todolist", { params }),
+    select: (res) => res.data,
+    staleTime: 1000 * 60, // fresh => stale 전환되는데 걸리는 시간
+    gcTime: 1000 * 60 * 5, // 캐시 제거
+  });
 
   // 삭제 작업
   const handleDelete = async (_id) => {
@@ -58,7 +48,7 @@ function TodoList() {
       alert("할일이 삭제 되었습니다.");
 
       // 목록을 다시 조회
-      fetchList();
+      refetch();
     } catch (err) {
       console.error(err);
       alert("할일 삭제에 실패했습니다.");
