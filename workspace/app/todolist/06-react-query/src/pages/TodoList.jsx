@@ -1,6 +1,6 @@
 import useAxiosInstance from "@hooks/useAxiosInstance";
 import TodoListItem from "@pages/TodoListItem";
-import { /* useEffect, */ useRef /* useState */ } from "react";
+import { /* useEffect, */ useRef /* useState*/ } from "react";
 import { Link, /* Outlet, */ useSearchParams } from "react-router-dom";
 import "../Pagination.css";
 import Pagination from "@components/Pagination";
@@ -16,7 +16,7 @@ function TodoList() {
   const params = {
     keyword: searchParams.get("keyword") || "",
     page: searchParams.get("page") || 1,
-    limit: 5,
+    limit: 20,
   };
 
   // axios 인스턴스
