@@ -12,9 +12,9 @@ function Pagination({ totalPages, current = 1 }) {
 
   for (let page = 1; page <= totalPages; page++) {
     searchParams.set("page", page);
-    // keyword = 환승 & page = 1
-    // keyword = 환승 & page = 2
-    // keyword = 환승 & page = 3
+    // keyword=환승&page=1
+    // keyword=환승&page=2
+    // keyword=환승&page=3
     let search = searchParams.toString();
     pageList.push(
       <li key={page} className={current === page ? "active" : ""}>
@@ -29,4 +29,5 @@ function Pagination({ totalPages, current = 1 }) {
     </div>
   );
 }
+
 export default Pagination;
