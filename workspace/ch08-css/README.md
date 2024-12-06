@@ -157,8 +157,8 @@ npx tailwindcss init -p
   - tailwindcss를 적용할 대상 확장자 지정
     ```js
     /** @type {import('tailwindcss').Config} */
-    module.exports = {
-      content: ["./src/**/*.{js,jsx}"],
+    export default {
+      content: ["index.html", "./src/**/*.{js,jsx}"],
       theme: {
         extend: {},
       },
