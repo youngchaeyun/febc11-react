@@ -59,7 +59,7 @@ export default function Detail() {
         </form>
       </section>
 
-      <CommentList />
+      <CommentList data={data.item.replies} />
     </main>
   );
 }
