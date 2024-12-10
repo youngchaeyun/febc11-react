@@ -14,20 +14,41 @@ export default function Signup() {
   } = useForm();
   const axios = useAxiosInstance();
   const addUser = useMutation({
-    mutationFn: (formData) => {
-      const body = {
-        type: "user",
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      };
-      return axios.post(`/users`, body);
+    mutationFn: async (userInfo) => {
+      // userInfo { name: '무지', email: 'aa@bb.cc', password: '11111111', attach: File }
+
+      // 이미지 먼저 업로드
+      if (userInfo.attach.length > 0) {
+        const imageFormData = new FormData();
+        imageFormData.append("attach", userInfo.attach[0]);
+
+        const fileRes = await axios("/files", {
+          method: "post",
+          headers: {
+            // 파일 업로드시 필요한 설정
+            "Content-Type": "multipart/form-data",
+          },
+          data: imageFormData,
+        });
+
+        userInfo.image = fileRes.data.item[0];
+        // userInfo { name: '무지', email: 'aa@bb.cc', password: '11111111', attach: File, image: { orginalname: '', name: '', path: '' } }
+        delete userInfo.attach;
+        // userInfo { name: '무지', email: 'aa@bb.cc', password: '11111111', image: { orginalname: '', name: '', path: '' } }
+      }
+
+      userInfo.type = "user";
+      // userInfo { type: 'user', name: '무지', email: 'aa@bb.cc', password: '11111111', image: { orginalname: '', name: '', path: '' } }
+
+      console.log(userInfo);
+      return axios.post(`/users`, userInfo);
     },
     onSuccess: () => {
       alert("회원가입 완료");
       navigate(`/`);
     },
     onError: (err) => {
+      console.error(err);
       if (err.response?.data.errors) {
         err.response?.data.errors.forEach((error) =>
           setError(error.path, { message: error.msg })
@@ -77,7 +98,7 @@ export default function Signup() {
               id="email"
               placeholder="이메일을 입력하세요"
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-orange-400 dark:bg-gray-700"
-              {...register("email", { required: "이메일은 필수입니다. " })}
+              {...register("email", { required: "이메일은 필수입니다." })}
             />
             <InputError target={errors.email} />
           </div>
