@@ -17,6 +17,7 @@ function useAxiosInstance() {
   // 요청 인터셉터 추가하기
   instance.interceptors.request.use((config) => {
     if (user) {
+      // 로그인한 사용자의 accessToken 사용
       config.headers["Authorization"] = `Bearer ${user.accessToken}`; // 일반 회원
     }
 
