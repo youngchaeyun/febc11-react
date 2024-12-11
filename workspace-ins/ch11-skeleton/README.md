@@ -911,7 +911,7 @@ export default {
           }
         });
 
-        userInfo.image = fileRes.data.item[0];
+        userInfo.image = fileRes.data.item[0].path;
         delete userInfo.attach;
       }
 
@@ -1064,6 +1064,17 @@ export default {
     ```jsx
     <form onSubmit={ handleLogout }>
     ```
+* List.jsx
+  - 로그인 된 사용자만 게시글 작성 가능
+  ```jsx
+  const { user } = useUserStore();
+  ```
+
+  ```jsx
+  { user && 
+    <Link to={`/${type}/new`} className="......">글작성</Link>
+  }
+  ```
 
 * Detail.jsx
   - 본인의 글에 대해서 수정, 삭제 버튼 노출
@@ -1179,6 +1190,20 @@ export default {
   }
 
   export default useAxiosInstance;
+  ```
+
+#### 로그인 후 페이지 이동
+* 로그인 하지 않은 상태로 인증이 필요한 API를 호출하면 로그인 페이지로 이동하는데 로그인을 완료한 후 이전 페이지로 이동하도록 구현
+* Login.jsx
+  ```jsx
+  const login = useMutation({
+    ......
+    onSuccess: (res) => {
+      ......
+      alert(res.data.item.name + '님, 로그인 되었습니다.');
+      navigate(location.state?.from || `/`);
+    },
+  });
   ```
 
 ## 다크 모드 적용
@@ -1490,7 +1515,7 @@ npm run preview
       <ToastContainer
         position="top-center"
         hideProgressBar={true}
-        autoClose={2000}
+        autoClose={1500}
         closeOnClick={true}
         theme="light"
         transition={ Slide }
@@ -1510,7 +1535,7 @@ npm run preview
       // invalidateQueries는 쿼리가 active 상태일때(쿼리를 실행한 컴포넌트가 마운트 됨) refetch를 하고
       // refetchQueries는 쿼리가 inactive 상태일때도(쿼리를 실행한 컴포넌트가 언마운트 됨) refetch를 함
       queryClient.refetchQueries({ queryKey: ['posts', type] });
-      toast.success('삭제되었습니다.2', {
+      toast.success('삭제되었습니다.', {
         onClose: () => navigate(`/${type}`)
       });
     }
