@@ -22,12 +22,9 @@ function useAxiosInstance() {
 
   // 요청 인터셉터 추가하기
   instance.interceptors.request.use((config) => {
-    if (user) {
-      let token = user.accessToken;
-      if (config.url === REFRESH_URL) {
-        token = user.refreshToken;
-      }
-      config.headers["Authorization"] = `Bearer ${token}`; // 일반 회원
+    // refresh 요청일 경우 Authorization 헤더는 이미 refresh token으로 지정되어 있음
+    if (user && config.url !== REFRESH_URL) {
+      config.headers.Authorization = `Bearer ${user.accessToken}`;
     }
 
     // 요청이 전달되기 전에 필요한 공통 작업 수행
@@ -61,7 +58,11 @@ function useAxiosInstance() {
           // refresh 토큰으로 access 토큰 재발급 요청
           const {
             data: { accessToken },
-          } = await instance.get(REFRESH_URL);
+          } = await instance.get(REFRESH_URL, {
+            headers: {
+              Authorization: `Bearer ${user.refreshToken}`,
+            },
+          });
           setUser({ ...user, accessToken });
           // 갱신된 accessToken으로 재요청
           config.headers.Authorization = `Bearer ${accessToken}`;
