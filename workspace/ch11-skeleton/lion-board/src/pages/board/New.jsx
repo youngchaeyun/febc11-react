@@ -14,7 +14,7 @@ export default function New() {
   } = useForm();
 
   const axios = useAxiosInstance();
-  const { type } = useParams();
+  const { type, _id } = useParams();
 
   const queryClient = useQueryClient();
 

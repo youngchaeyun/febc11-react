@@ -12,7 +12,7 @@ export default function MainPage() {
           따라 참여하고, 의견을 나누세요.
         </p>
         <Link
-          href="/"
+          to="/"
           className="bg-orange-500 text-white px-6 py-3 rounded hover:bg-orange-600"
         >
           커뮤니티 참여하기
