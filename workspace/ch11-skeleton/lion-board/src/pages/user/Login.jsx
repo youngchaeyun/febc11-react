@@ -3,11 +3,12 @@ import useAxiosInstance from "@hooks/useAxiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import useUserStore from "@zustand/userStore";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const setUser = useUserStore((store) => store.setUser);
 
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     register,
@@ -16,8 +17,8 @@ export default function Login() {
     setError,
   } = useForm({
     defaultValues: {
-      email: "chaechae@gmail.com",
-      password: "130613",
+      email: "yong@gmail.com",
+      password: "11111112",
     },
   });
   const axios = useAxiosInstance();
@@ -37,7 +38,7 @@ export default function Login() {
       });
 
       alert(res.data.item.name + "님, 로그인 되었습니다.");
-      navigate(`/`);
+      navigate(location.state?.from || `/`);
     },
     onError: (err) => {
       console.error(err);
