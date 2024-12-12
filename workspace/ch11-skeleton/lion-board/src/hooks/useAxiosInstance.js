@@ -7,6 +7,7 @@ const REFRESH_URL = "/auth/refresh";
 
 function useAxiosInstance() {
   const { user, setUser } = useUserStore();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -48,6 +49,7 @@ function useAxiosInstance() {
       // 공통 에러 처리
       console.error("인터셉터", error);
       const { config, response } = error;
+
       if (response?.status === 401) {
         // 인증 실패
         if (config.url === REFRESH_URL) {
