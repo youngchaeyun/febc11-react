@@ -235,32 +235,32 @@ npm run dev
 
 <img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Fpage-special-file.png&w=1920&q=75">
 
-- app/page.tsx
+- app/page.jsx
 
-  ```tsx
+  ```jsx
   export default function Page() {
     return <h1>Home</h1>;
   }
   ```
 
-- app/posts/page.tsx
+- app/posts/page.jsx
 
-  ```tsx
+  ```jsx
   export default function Page() {
     return <h1>목록 조회</h1>;
   }
   ```
 
-- app/posts/[id]/page.tsx
+- app/posts/[id]/page.jsx
 
-  ```tsx
+  ```jsx
   export default function Page() {
     return <h1>상세 조회</h1>;
   }
   ```
 
-- app/posts/new/page.tsx
-  ```tsx
+- app/posts/new/page.jsx
+  ```jsx
   export default function Page() {
     return <h1>글쓰기</h1>;
   }
@@ -273,16 +273,12 @@ npm run dev
 - 하위 폴더의 layout과 중첩됨
 - 생략 가능
 - `layout.js`, `layout.jsx`, `layout.tsx`로 작성
-- `app/layout.tsx`
+- `app/layout.jsx`
 
-  ```tsx
+  ```jsx
   import "./globals.css";
 
-  export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
+  export default function RootLayout({ children }) {
     return (
       <html lang="ko">
         <body className="flex flex-col h-screen">
@@ -317,13 +313,9 @@ npm run dev
 
   - `children`은 현재 폴더부터 URL 경로와 일치하는 폴더까지 내려가면서 찾은 layout이 중첩되고 마지막엔 URL 경로에 존재하는 page가 된다.
 
-- app/posts/layout.tsx
-  ```tsx
-  export default function PostLayout({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
+- app/posts/layout.jsx
+  ```jsx
+  export default function PostLayout({ children }) {
     return (
       <div className="flex flex-1 overflow-hidden">
         <aside className="w-48 bg-gray-800 text-white p-4 lg:w-64">
@@ -360,34 +352,28 @@ npm run dev
 ### 메타데이터
 
 - layout, page에서 metadata 변수나 generateMetadata 함수를 내보내기 하면 메타데이터 정의 가능
-- app/page.tsx에 추가
+- app/page.jsx에 추가
 
-  ```tsx
-  import { Metadata } from "next";
-  export const metadata: Metadata = {
+  ```jsx
+  export const metadata = {
     title: "Home",
     description: "Home 페이지입니다.",
   };
   ```
 
-- app/posts/page.tsx에 추가
+- app/posts/page.jsx에 추가
 
-  ```tsx
-  import { Metadata } from "next";
-  export const metadata: Metadata = {
+  ```jsx
+  export const metadata = {
     title: "게시물 목록 조회",
     description: "게시물 목록 조회 페이지입니다.",
   };
   ```
 
-- app/posts/[id]/page.tsx에 추가
+- app/posts/[id]/page.jsx에 추가
 
-  ```tsx
-  export async function generateMetadata({
-    params,
-  }: {
-    params: { id: string };
-  }) {
+  ```jsx
+  export async function generateMetadata({ params }) {
     const id = params.id;
     const data = {
       title: `${id} 안녕하세요.`,
@@ -409,9 +395,9 @@ npm run dev
 
   - Link 컴포넌트는 렌더링 되면 a 태그로 바뀜
 
-- app/layout.tsx 수정
+- app/layout.jsx 수정
 
-  ```tsx
+  ```jsx
   import Link from "next/link";
   ...
   <li><Link href="/" className="hover:underline">Home</Link></li>
@@ -420,8 +406,8 @@ npm run dev
   ...
   ```
 
-- app/posts/layout.tsx 수정
-  ```tsx
+- app/posts/layout.jsx 수정
+  ```jsx
   import Link from "next/link";
   ...
   <li><Link href="/posts" className="block hover:bg-gray-700 p-2 rounded">목록 조회</Link></li>
@@ -443,22 +429,18 @@ npm run dev
   }
   ```
 
-- app/layout.tsx 수정
+- app/layout.jsx 수정
 
-  ```tsx
+  ```jsx
   "use client";
 
   import { usePathname } from "next/navigation";
   import "./globals.css";
   import Link from "next/link";
 
-  export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
+  export default function RootLayout({ children }) {
     const pathname = usePathname();
-    const isActive = (path: string) => (pathname === path ? "cs-active" : "");
+    const isActive = (path) => (pathname === path ? "cs-active" : "");
 
     return (
       <html lang="ko">
@@ -504,8 +486,8 @@ npm run dev
 - 프로그래밍 방식으로 페이지 이동 가능
 - 꼭 필요한 경우가 아니라면 Link 컴포넌트 사용 권장
 
-- app/posts/new/page.tsx 수정
-  ```tsx
+- app/posts/new/page.jsx 수정
+  ```jsx
   "use client";
   import { useRouter } from "next/navigation";
   export default function Page() {
@@ -529,8 +511,8 @@ npm run dev
 
   - 서버 액션일 경우(POST 요청의 성공 페이지로 이동할 때) 303(See Other, 새로운 페이지로 GET 요청) 응답 상태코드
 
-- app/posts/new/page.tsx
-  ```tsx
+- app/posts/new/page.jsx
+  ```jsx
   "use client";
   import { useRouter, redirect } from "next/navigation";
   export default function Page() {
@@ -593,10 +575,10 @@ npm run dev
 - 사용사례: 로그인되지 않은 사용자를 로그인 페이지로 이동
 
   ```ts
-  import { NextResponse, NextRequest } from "next/server";
+  import { NextResponse } from "next/server";
   import { authenticate } from "auth-provider";
 
-  export function middleware(request: NextRequest) {
+  export function middleware(request) {
     const isAuthenticated = authenticate(request);
 
     // 인증된 사용자라면 원래의 요청작업 진행
@@ -665,9 +647,9 @@ npm run dev
 - 렌더링이 완료되면 완료된 컴포넌트로 자동 교체
 - 로딩중 상태에서도 공유 레이아웃 사용 가능
 
-- app/posts/loading.tsx 작성
+- app/posts/loading.jsx 작성
 
-  ```tsx
+  ```jsx
   export default function Loading() {
     return <div>로딩중...</div>;
   }
@@ -675,12 +657,12 @@ npm run dev
 
 - loading 파일과 같은 폴더에 있는 layout 파일에 page를 `<Suspense>`로 감싼 것처럼 동작
 
-  ```tsx
+  ```jsx
   <Suspense fallback={<Loading />}>{children}</Suspense>
   ```
 
-- app/posts/page.tsx 수정
-  ```tsx
+- app/posts/page.jsx 수정
+  ```jsx
   export default async function Page(){
     await new Promise(resolve => setTimeout(resolve, 1000*3));
     return ( ... );
@@ -709,7 +691,7 @@ npm run dev
 - 오류가 발생할 경우 error.js 파일에서 오류 처리
   - 클라이언트 컴포넌트여야 함
 - error 파일과 같은 폴더에 있는 layout 파일에 page를 `<ErrorBoundary>`로 감싼 것처럼 동작
-  ```tsx
+  ```jsx
   <ErrorBoundary fallback={<Error />}>{children}</ErrorBoundary>
   ```
 
@@ -853,7 +835,7 @@ npm run dev
     }
     ```
 
-```tsx
+```jsx
 // before
 import { Button } from "../../../components/button";
 
@@ -890,8 +872,8 @@ import { Button } from "@/components/button";
   - posts/1, posts/2 -> posts/[id]
 - 실제 요청한 URL의 동적 경로 값은 layout, page, route, generateMetadata 함수에 params prop으로 전달됨
 - 요청한 URL이 /posts/3일 경우 3을 꺼내는 방법
-  ```tsx
-  export default function Page({ params: { id } }: { params: { id: string } }) {
+  ```jsx
+  export default function Page({ params: { id } }) {
     return <h1>{params.id}번 게시물 상세 조회</h1>;
   }
   ```
@@ -917,7 +899,7 @@ import { Button } from "@/components/button";
 
 - 빌드 할 때 동작 순서
 
-  ```tsx
+  ```jsx
   export async function generateStaticParams() {
     // 공지글에 대한 fetch 작업
     const posts = [
@@ -931,7 +913,7 @@ import { Button } from "@/components/button";
     }))
   }
 
-  export default async function Page({ params: { id } }: { params: { id: string } }){
+  export default async function Page({ params: { id } }){
     const resJson = await fetchPost(id);
     let data = resJson.ok ? resJson.item : null;
     return (
@@ -960,25 +942,11 @@ import { Button } from "@/components/button";
 - 폴더명을 이중 대괄호로 묶어서 작성하면 Catch-all 세그먼트를 선택사항으로 지정
 
 - 특정 게시글과 댓글 목록, 댓글 상세 정보를 하나의 page로 처리할 경우
-  - app/posts/[id]/[[...slug]]/page.js
+  - app/posts/[id]/[[...slug]]/page.jsx
     - /posts/1 -> { id: '1' }
     - /posts/2 -> { id: '2' }
     - /posts/3/replies -> { id: '3', slug: ['replies'] }
     - /posts/3/replies/2 -> { id: '3', slug: ['replies', '2'] }
-
-### 동적 경로에 대한 타입 스크립트 params 타입
-
-- app/posts/[id]/page.js
-
-```tsx
-export default function Page({ params }: { params: { id: string } }) {
-  return <h1>My Page</h1>;
-}
-```
-
-- app/posts/[...slug]/page.js -> { slug: string[] }
-- app/posts/[[...slug]]/page.js -> { slug?: string[] }
-- app/posts/[id]/[slug]/page.js -> { id: string, slug: string }
 
 ## 4.11 라우트 핸들러
 
@@ -990,8 +958,8 @@ export default function Page({ params }: { params: { id: string } }) {
   - 지원되지 않은 메서드 호출 시 405 Method Not Allowed 에러 응답
 - page 파일 대신 route.js 나 route.ts 파일로 작성
 
-```tsx
-export async function GET(request: Request) {
+```js
+export async function GET(request) {
   const res = await fetch("https://api.fesp.shop/posts");
   const data = await res.json();
 
@@ -1011,13 +979,13 @@ export async function GET(request: Request) {
 - 캐시 설정
   - fetch 옵션의 next.revalidate 속성으로 지정
     - 숫자: 초단위의 캐시 시간 지정
-      ```ts
+      ```js
       const res = await fetch("http://localhost/posts", {
         next: { revalidate: 60 }, // Revalidate every 60 seconds
       });
       ```
   - 라우트 세그먼트 설정 옵션의 revalidate 설정
-    ```ts
+    ```js
     export const revalidate = 60;
     ```
 
@@ -1025,10 +993,8 @@ export async function GET(request: Request) {
 
 - Fetch API의 Request, Response를 확장하여 추가적인 편의 메서드 제공
 
-```ts
-import { type NextRequest } from 'next/server';
-
-export function GET(request: NextRequest) {
+```js
+export function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('query');
   // query is "hello" for /api/search?query=hello
