@@ -10,6 +10,11 @@ async function fetchPosts(type) {
   return await res.json();
 }
 
+export const metadata = {
+  title: "게시물 목록",
+  description: "게시물 목록 페이지 입니다. ",
+};
+
 export default async function Page({ params }) {
   // const { type } = params; // Next.js 14
   // Next.js 15에서 params가 Promise로 전달됨
