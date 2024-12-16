@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useEffect } from "react";
 
 // 게시물 상세정보를 조회해서 반환
 async function fetchPost(_id){
