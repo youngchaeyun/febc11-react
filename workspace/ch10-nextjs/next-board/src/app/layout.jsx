@@ -1,3 +1,5 @@
+import "./globals.css";
+
 import Link from "next/link";
 
 export default function RootLayout({ children }) {
@@ -8,6 +10,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>멋쟁이 사자처럼 커뮤니티 - 멋사컴</title>
+
         <meta
           name="description"
           content="다양한 주제의 커뮤니티와 활발한 소통을 위한 플랫폼입니다. 관심사에 따라 참여하고, 의견을 나누세요."
@@ -17,6 +20,7 @@ export default function RootLayout({ children }) {
           content="커뮤니티, 소통, 포럼, 관심사, 온라인 모임, 커뮤니티 서비스"
         />
         <meta name="author" content="Front End Boot Camp" />
+
         <meta property="og:title" content="멋사컴에 오신걸 환영합니다." />
         <meta
           property="og:description"
@@ -57,6 +61,7 @@ export default function RootLayout({ children }) {
                     </li>
                   </ul>
                 </div>
+
                 <div className="w-1/2 order-1 flex justify-end items-center md:order-2 md:w-auto">
                   <div className="flex justify-end">
                     <Link
@@ -72,6 +77,7 @@ export default function RootLayout({ children }) {
                       회원가입
                     </Link>
                   </div>
+
                   <button
                     type="button"
                     data-toggle-dark="dark"
@@ -102,7 +108,9 @@ export default function RootLayout({ children }) {
                 </div>
               </nav>
             </header>
+
             {children}
+
             <footer className="p-4 pb-12 w-full border-t border-t-slate-200  dark:border-t-slate-500 dark:bg-gray-600 text-gray-600 dark:text-white transition-color duration-500 ease-in-out">
               <div className="min-w-[320px] flex flex-wrap gap-4 justify-center items-center text-sm text-slate-400">
                 <Link
